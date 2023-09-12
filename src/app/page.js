@@ -1,11 +1,19 @@
 import React from 'react';
 
 import BlogSummaryCard from '@/components/BlogSummaryCard';
+import { BLOG_TITLE, BLOG_DESCRIPTION } from '@/constants';
 import { getBlogPostList } from '@/helpers/file-helpers';
 
 import styles from './homepage.module.css';
 
 const BLOG_POSTS = await getBlogPostList();
+
+export async function generateMetadata() {
+  return {
+    title: `${BLOG_TITLE}`,
+    description: `${BLOG_DESCRIPTION}`,
+  };
+}
 
 function Home() {
   return (
