@@ -37,7 +37,8 @@ function CircularColorsDemo() {
 
   // TODO: This value should cycle through the colors in the
   // COLORS array:
-  const selectedColor = COLORS[0];
+  const colorIndex = timeElapsed % COLORS.length;
+  const selectedColor = COLORS[colorIndex];
 
   return (
     <Card as="section" className={styles.wrapper}>
