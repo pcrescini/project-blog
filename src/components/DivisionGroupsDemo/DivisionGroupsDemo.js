@@ -3,7 +3,7 @@ import React from 'react';
 import clsx from 'clsx';
 
 import { range } from '@/utils';
-import { MotionConfig, LayoutGroup, motion } from 'framer-motion';
+import { LayoutGroup, motion } from 'framer-motion';
 
 import Card from '@/components/Card';
 import SliderControl from '@/components/SliderControl';
@@ -37,7 +37,7 @@ function DivisionGroupsDemo({
         };
 
   return (
-    <MotionConfig reducedMotion="user">
+    <LayoutGroup>
       <Card as="section" className={styles.wrapper}>
         <header className={styles.header}>
           <SliderControl
@@ -105,7 +105,7 @@ function DivisionGroupsDemo({
           remainder={remainder}
         />
       </Card>
-    </MotionConfig>
+    </LayoutGroup>
   );
 }
 
