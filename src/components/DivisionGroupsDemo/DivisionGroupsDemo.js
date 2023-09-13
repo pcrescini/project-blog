@@ -60,8 +60,8 @@ function DivisionGroupsDemo({
                   const layoutId = `${id}-${index + totalInPreviousGroups}`;
                   return (
                     <motion.div
-                      layoutId={layoutId}
                       key={layoutId}
+                      layoutId={layoutId}
                       className={styles.item}
                       transition={{
                         type: 'spring',
@@ -80,22 +80,24 @@ function DivisionGroupsDemo({
           <div className={styles.remainderArea}>
             <p className={styles.remainderHeading}>Remainder Area</p>
 
-            {range(remainder).map((index) => {
-              const totalInPreviousGroups = numOfItems - remainder;
-              const layoutId = `${id}-${index + totalInPreviousGroups}`;
-              return (
-                <motion.div
-                  layoutId={layoutId}
-                  key={layoutId}
-                  className={styles.item}
-                  transition={{
-                    type: 'spring',
-                    stiffness: 400,
-                    damping: 40 + index * 5,
-                  }}
-                />
-              );
-            })}
+            {range(remainder)
+              .reverse()
+              .map((index) => {
+                const totalInGroups = numOfGroups * numOfItemsPerGroup;
+                const layoutId = `${id}-${index + totalInGroups}`;
+                return (
+                  <motion.div
+                    key={layoutId}
+                    layoutId={layoutId}
+                    className={styles.item}
+                    transition={{
+                      type: 'spring',
+                      stiffness: 400,
+                      damping: 40 + index * 5,
+                    }}
+                  />
+                );
+              })}
           </div>
         )}
 
