@@ -5,6 +5,7 @@ import BlogHero from '@/components/BlogHero';
 import CodeSnippet from '@/components/CodeSnippet';
 import CircularColorsDemo from '@/components/CircularColorsDemo';
 
+import { notFound } from 'next/navigation';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import { loadBlogPost } from '@/helpers/file-helpers';
 import { BLOG_TITLE } from '@/constants';
@@ -12,12 +13,16 @@ import { BLOG_TITLE } from '@/constants';
 import styles from './postSlug.module.css';
 
 const DivisionGroupsDemo = dynamic(() =>
-  import('@/components/DivisionGroupsDemo'),
+  import('@/components/DivisionGroupsDemo')
 );
 
 export async function generateMetadata({ params }) {
   const href = `/${params.postSlug}`;
   const blogPost = await loadBlogPost(href);
+
+  if (!blogPost) {
+    return null;
+  }
 
   return {
     title: `${blogPost.frontmatter.title} • ${BLOG_TITLE}`,
@@ -28,6 +33,10 @@ export async function generateMetadata({ params }) {
 async function BlogPost({ params }) {
   const href = `/${params.postSlug}`;
   const blogPost = await loadBlogPost(href);
+
+  if (!blogPost) {
+    notFound();
+  }
 
   return (
     <article className={styles.wrapper}>
