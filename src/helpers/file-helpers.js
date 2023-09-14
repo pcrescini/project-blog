@@ -22,7 +22,7 @@ export async function getBlogPostList() {
   return blogPosts.sort((p1, p2) => (p1.publishedOn < p2.publishedOn ? 1 : -1));
 }
 
-export const loadBlogPost = React.cache(async (slug) => {
+export const loadBlogPost = React.cache(async function loadBlogPost(slug) {
   let rawContent;
 
   try {

@@ -17,36 +17,38 @@ const DivisionGroupsDemo = dynamic(() =>
 );
 
 export async function generateMetadata({ params }) {
-  const href = `/${params.postSlug}`;
-  const blogPost = await loadBlogPost(href);
+  const blogPostData = await loadBlogPost(params.postSlug);
 
-  if (!blogPost) {
+  if (!blogPostData) {
     return null;
   }
 
+  const { frontmatter } = blogPostData;
+
   return {
-    title: `${blogPost.frontmatter.title} • ${BLOG_TITLE}`,
-    description: `${blogPost.frontmatter.abstract}`,
+    title: `${frontmatter.title} • ${BLOG_TITLE}`,
+    description: `${frontmatter.abstract}`,
   };
 }
 
 async function BlogPost({ params }) {
-  const href = `/${params.postSlug}`;
-  const blogPost = await loadBlogPost(href);
+  const blogPostData = await loadBlogPost(params.postSlug);
 
-  if (!blogPost) {
+  if (!blogPostData) {
     notFound();
   }
+
+  const { frontmatter, content } = blogPostData;
 
   return (
     <article className={styles.wrapper}>
       <BlogHero
-        title={blogPost.frontmatter.title}
-        publishedOn={blogPost.frontmatter.publishedOn}
+        title={frontmatter.title}
+        publishedOn={frontmatter.publishedOn}
       />
       <div className={styles.page}>
         <MDXRemote
-          source={blogPost.content}
+          source={content}
           components={{
             pre: CodeSnippet,
             DivisionGroupsDemo,
