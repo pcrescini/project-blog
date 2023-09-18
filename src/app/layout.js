@@ -3,7 +3,12 @@ import { cookies } from 'next/headers';
 import { Work_Sans, Spline_Sans_Mono } from 'next/font/google';
 import clsx from 'clsx';
 
-import { LIGHT_TOKENS, DARK_TOKENS } from '@/constants';
+import {
+  BLOG_TITLE,
+  BLOG_DESCRIPTION,
+  LIGHT_TOKENS,
+  DARK_TOKENS,
+} from '@/constants';
 
 import RespectMotionPreferences from '@/components/RespectMotionPreferences';
 import Header from '@/components/Header';
@@ -24,6 +29,11 @@ const monoFont = Spline_Sans_Mono({
   variable: '--font-family-mono',
 });
 
+export const metadata = {
+  title: BLOG_TITLE,
+  description: BLOG_DESCRIPTION,
+};
+
 function RootLayout({ children }) {
   // TODO: Dynamic theme depending on user preference
   const savedTheme = cookies().get('color-theme');
@@ -33,7 +43,7 @@ function RootLayout({ children }) {
   return (
     <RespectMotionPreferences>
       <html
-        lang="en"
+        lang='en'
         className={clsx(mainFont.variable, monoFont.variable)}
         data-color-theme={theme}
         style={themeColors}
