@@ -32,7 +32,7 @@ function CircularColorsDemo() {
     return () => {
       window.clearInterval(intervalId);
     };
-  }, [isPlaying, timeElapsed]);
+  }, [isPlaying]);
 
   // TODO: This value should cycle through the colors in the
   // COLORS array:
@@ -43,7 +43,7 @@ function CircularColorsDemo() {
 
   return (
     <LayoutGroup>
-      <Card as="section" className={styles.wrapper}>
+      <Card as='section' className={styles.wrapper}>
         <ul className={styles.colorsWrapper}>
           {COLORS.map((color, index) => {
             const isSelected = color.value === selectedColor.value;
@@ -64,7 +64,7 @@ function CircularColorsDemo() {
                 <div
                   className={clsx(
                     styles.colorBox,
-                    isSelected && styles.selectedColorBox,
+                    isSelected && styles.selectedColorBox
                   )}
                   style={{
                     backgroundColor: color.value,
